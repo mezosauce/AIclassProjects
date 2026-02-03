@@ -63,16 +63,33 @@ class Map:
 
         return self.sld_to_bucharest.get(city, float('inf'))
     
-    def estimate_sld(self, city1, city2):
 
-        # TODO: Implement heuristic estimation using triangle inequality
-        # Hint: Use known SLD to Bucharest as a reference point
-        
-        if city2 == 'Bucharest':
-            return self.get_sld_to_bucharest(city1)
-        
-        return 0
+    # |SLD(A→B) - SLD(C→B)| ≤ SLD(A→C) ≤ SLD(A→B) + SLD(C→B)
+
+    # Hueristic Search
     
+    # Method 1 Hueristic Search (Lower Bound)
+
+    def estimate_lower_bound(self, city1, city2):
+        if city1 == 'Bucharest' or city2 == 'Bucharest':
+            return self.get_sld_to_bucharest(city1 if city2 == 'Bucharest' else city2)
+
+        sld1 = self.get_sld_to_bucharest(city1)
+        sld2 = self.get_sld_to_bucharest(city2)
+        return abs(sld1 - sld2)
+    
+    
+    # Method 2 Hueristic Search (Upper Bound)
+    
+    def estimate_upper_bound(self, city1, city2):
+        if city1 == 'Bucharest' or city2 == 'Bucharest':
+            return self.get_sld_to_bucharest(city1 if city2 == 'Bucharest' else city2)
+        sld1 = self.get_sld_to_bucharest(city1)
+        sld2 = self.get_sld_to_bucharest(city2)
+        return sld1 + sld2
+    
+
+
     def __str__(self):
         result = "Romanian Road Map:\n"
         result += f"Total cities: {len(self.cities)}\n"
@@ -83,5 +100,17 @@ class Map:
 
 if __name__ == "__main__":
     romania = Map()
-    
-    print("Keys in Map.graph:", romania)
+
+    print("Testing the estimate_upper_bound method:")
+    print(f"Upper bound estimate from Arad to Bucharest: {romania.estimate_upper_bound('Arad', 'Bucharest')}")
+    print(f"Upper bound estimate from Sibiu to Mehadia: {romania.estimate_upper_bound('Sibiu', 'Mehadia')}")
+    print ("NOW TESTING THE LOWER BOUND METHOD:")
+    print(f"Lower bound estimate from Arad to Bucharest: {romania.estimate_lower_bound('Arad', 'Bucharest')}")
+    print(f"Lower bound estimate from Sibiu to Mehadia: {romania.estimate_lower_bound('Sibiu', 'Mehadia')}")
+
+    print("Calculating average of upper and lower bound estimates between all city pairs:")
+    print("AVERAGE CALCULATED FOR SIBIU TO MEHADIA:")
+    lower_bound = romania.estimate_lower_bound('Sibiu', 'Mehadia')
+    upper_bound = romania.estimate_upper_bound('Sibiu', 'Mehadia')
+    average = (lower_bound + upper_bound) / 2
+    print(f"Lower bound: {lower_bound}, Upper bound: {upper_bound}, Average: {average}")
