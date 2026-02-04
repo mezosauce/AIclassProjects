@@ -26,26 +26,26 @@ class Map:
         }
         
         self.sld_to_bucharest = {
-            'Arad': 366,
-            'Bucharest': 0,
-            'Craiova': 160,
-            'Drobeta': 242,
-            'Eforie': 161,
-            'Fagaras': 176,
-            'Giurgiu': 77,
-            'Hirsova': 151,
-            'Iasi': 226,
-            'Lugoj': 244,
-            'Mehadia': 241,
-            'Neamt': 234,
-            'Oradea': 380,
-            'Pitesti': 100,
-            'Rimnicu Vilcea': 193,
-            'Sibiu': 253,
-            'Timisoara': 329,
-            'Urziceni': 80,
-            'Vaslui': 199,
-            'Zerind': 374
+            "Arad": 366,
+            "Bucharest": 0,
+            "Craiova": 160,
+            "Drobeta": 242,
+            "Eforie": 161,
+            "Fagaras": 176,  # NOTE: The lecture slides have this as 178
+            "Giurgiu": 77,
+            "Hirsova": 151,
+            "Iasi": 226,
+            "Lugoj": 244,
+            "Mehadia": 241,
+            "Neamt": 234,
+            "Oradea": 380,
+            "Pitesti": 100,  # NOTE: The lecture slides have this as 98
+            "Rimnicu Vilcea": 193,
+            "Sibiu": 253,
+            "Timisoara": 329,
+            "Urziceni": 80,
+            "Vaslui": 199,
+            "Zerind": 374,
         }
         
         self.cities = list(self.graph.keys())
