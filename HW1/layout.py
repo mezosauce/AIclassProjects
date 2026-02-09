@@ -114,3 +114,19 @@ if __name__ == "__main__":
     upper_bound = romania.estimate_upper_bound('Sibiu', 'Mehadia')
     average = (lower_bound + upper_bound) / 2
     print(f"Lower bound: {lower_bound}, Upper bound: {upper_bound}, Average: {average}")
+
+
+class Node:
+    def __init__(self, city, parent=None, g=0, h=0):
+        self.city = city
+        self.parent = parent
+        self.g = g
+        self.h = h
+        self.f = g + h
+
+    def __lt__(self, other):
+        # Comparison for priority queue (min-heap based on f cost)
+        if self.f == other.f:
+            # Tie-breaker: prefer lower h (closer to goal)
+            return self.h < other.h
+        return self.f < other.f

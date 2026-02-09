@@ -1,17 +1,7 @@
 from layout import Map
 
+
 def depth_first_search(map_obj, start, goal):
-    """
-    Implements Depth First Search algorithm.
-    
-    Args:
-        map_obj: Instance of Map class
-        start: Start city name
-        goal: Goal city name
-        
-    Returns:
-        tuple: (path_list, nodes_expanded_count)
-    """
     # Stack stores (current_city, path_taken)
     stack = [(start, [start])]
     visited = set()
@@ -19,10 +9,10 @@ def depth_first_search(map_obj, start, goal):
 
     while stack:
         current_city, path = stack.pop()
-        
+
         if current_city in visited:
             continue
-            
+
         nodes_expanded += 1
         visited.add(current_city)
 
@@ -30,7 +20,7 @@ def depth_first_search(map_obj, start, goal):
             return path, nodes_expanded
 
         # Get neighbors and add to stack
-        # To match the "first child" logic often used in DFS, 
+        # To match the "first child" logic often used in DFS,
         # we can reverse the neighbors if we want to expand them in a specific order,
         # but standard DFS just pushes them onto the stack.
         neighbors = map_obj.get_neighbors(current_city)
@@ -42,21 +32,49 @@ def depth_first_search(map_obj, start, goal):
 
     return None, nodes_expanded
 
+
 if __name__ == "__main__":
     romania_map = Map()
+
+    # Store results for table
+    results = []
+
+    test_cases = [
+        ("Arad", "Bucharest"),
+        ("Sibiu", "Mehadia"),
+        ("Oradea", "Eforie"),
+        ("Timisoara", "Giurgiu"),
+        ("Neamt", "Drobeta")
+    ]
+
+    print("--- Depth First Search Testing ---")
+
+    for start_city, goal_city in test_cases:
+        path, nodes = depth_first_search(romania_map, start_city, goal_city)
+        
+        # Calculate path cost
+        cost = 0
+        if path:
+            for i in range(len(path) - 1):
+                distance = romania_map.get_distance(path[i], path[i+1])
+                if distance:
+                    cost += distance
+        
+        results.append({
+            'test_case': f'{start_city} → {goal_city}',
+            'path': ' → '.join(path) if path else 'No path',
+            'cost': cost,
+            'nodes': nodes
+        })
+
+    # Print results table
+    print("\n" + "="*100)
+    print("DEPTH FIRST SEARCH RESULTS SUMMARY")
+    print("="*100)
+    print(f"{'Test Case':<25} {'Path Cost':<12} {'Nodes Expanded':<18} {'Path'}")
+    print("-"*100)
     
-    print("--- Depth First Search: Arad to Bucharest ---")
-    start_city = "Arad"
-    goal_city = "Bucharest"
+    for result in results:
+        print(f"{result['test_case']:<25} {result['cost']:<12} {result['nodes']:<18} {result['path']}")
     
-    path, count = depth_first_search(romania_map, start_city, goal_city)
-    print(f"Path: {path}")
-    print(f"Nodes Expanded: {count}")
-    
-    print("\n--- Depth First Search: Sibiu to Mehadia ---")
-    start_city = "Sibiu"
-    goal_city = "Mehadia"
-    
-    path, count = depth_first_search(romania_map, start_city, goal_city)
-    print(f"Path: {path}")
-    print(f"Nodes Expanded: {count}")
+    print("="*100)

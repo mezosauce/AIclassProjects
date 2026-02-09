@@ -1,22 +1,6 @@
 import heapq
+from layout import Map, Node
 
-from layout import Map
-
-
-class Node:
-    def __init__(self, city, parent=None, g=0, h=0):
-        self.city = city
-        self.parent = parent
-        self.g = g
-        self.h = h
-        self.f = g + h
-
-    def __lt__(self, other):
-        # Comparison for priority queue (min-heap based on f cost)
-        if self.f == other.f:
-            # Tie-breaker: prefer lower h (closer to goal)
-            return self.h < other.h
-        return self.f < other.f
 
 
 def a_star_search(map_obj, start, goal, heuristic_method="lower"):
@@ -82,34 +66,47 @@ def a_star_search(map_obj, start, goal, heuristic_method="lower"):
 if __name__ == "__main__":
     romania_map = Map()
 
-    # Test Case 1: Arad to Bucharest (Standard Textbook Example)
-    print("--- Test Case 1: Arad to Bucharest ---")
-    start_city = "Arad"
-    goal_city = "Bucharest"
+    # Store results for table
+    results = []
 
-    # Method 1: Lower Bound (Admissible)
-    path_lower, count_lower = a_star_search(romania_map, start_city, goal_city, "lower")
-    print("Lower Bound Heuristic:")
-    print(f"  Path: {path_lower}")
-    print(f"  Nodes Expanded: {count_lower}")
+    test_configs = [
+        ("Arad", "Bucharest"),
+        ("Sibiu", "Mehadia"),
+        ("Oradea", "Eforie"),
+        ("Timisoara", "Giurgiu"),
+        ("Neamt", "Drobeta")
+    ]
 
-    # Method 2: Upper Bound (Likely Inadmissible)
-    path_upper, count_upper = a_star_search(romania_map, start_city, goal_city, "upper")
-    print("Upper Bound Heuristic:")
-    print(f"  Path: {path_upper}")
-    print(f"  Nodes Expanded: {count_upper}")
+    print("--- A* Search Testing ---")
 
-    # Test Case 2: Sibiu to Mehadia (Goal != Bucharest)
-    print("\n--- Test Case 2: Sibiu to Mehadia ---")
-    start_city = "Sibiu"
-    goal_city = "Mehadia"
+    for start_city, goal_city in test_configs:
+        for method in ["lower", "upper"]:
+            path, nodes = a_star_search(romania_map, start_city, goal_city, method)
+            
+            # Calculate path cost
+            cost = 0
+            if path:
+                for i in range(len(path) - 1):
+                    distance = romania_map.get_distance(path[i], path[i+1])
+                    if distance:
+                        cost += distance
+            
+            results.append({
+                'test_case': f'{start_city} → {goal_city}',
+                'method': method.capitalize() + " Bound",
+                'path': ' → '.join(path) if path else 'No path',
+                'cost': cost,
+                'nodes': nodes
+            })
 
-    path_lower, count_lower = a_star_search(romania_map, start_city, goal_city, "lower")
-    print("Lower Bound Heuristic:")
-    print(f"  Path: {path_lower}")
-    print(f"  Nodes Expanded: {count_lower}")
-
-    path_upper, count_upper = a_star_search(romania_map, start_city, goal_city, "upper")
-    print("Upper Bound Heuristic:")
-    print(f"  Path: {path_upper}")
-    print(f"  Nodes Expanded: {count_upper}")
+    # Print results table
+    print("\n" + "="*100)
+    print("A* SEARCH RESULTS SUMMARY")
+    print("="*100)
+    print(f"{'Test Case':<25} {'Heuristic':<15} {'Path Cost':<12} {'Nodes Expanded':<18} {'Path'}")
+    print("-"*100)
+    
+    for result in results:
+        print(f"{result['test_case']:<25} {result['method']:<15} {result['cost']:<12} {result['nodes']:<18} {result['path']}")
+    
+    print("="*100)

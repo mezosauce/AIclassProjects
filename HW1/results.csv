@@ -1,0 +1,37 @@
+test_case,algorithm,success,cost,nodes_expanded,time_ms,path
+Arad -> Bucharest,BFS,Yes,450,6,0.0012301250026212074,Arad -> Sibiu -> Fagaras -> Bucharest
+Arad -> Bucharest,DFS,Yes,607,6,0.0015151229999901261,Arad -> Zerind -> Oradea -> Sibiu -> Fagaras -> Bucharest
+Arad -> Bucharest,Greedy (Lower),Yes,418,6,0.0045505109992518555,Arad -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest
+Arad -> Bucharest,Greedy (Upper),Yes,418,6,0.004454563000763301,Arad -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest
+Arad -> Bucharest,A* (Lower),Yes,418,6,0.004722877998574404,Arad -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest
+Arad -> Bucharest,A* (Upper),Yes,418,6,0.005867971998668509,Arad -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest
+Sibiu -> Mehadia,BFS,Yes,439,11,0.002042347001406597,Sibiu -> Arad -> Timisoara -> Lugoj -> Mehadia
+Sibiu -> Mehadia,DFS,Yes,439,7,0.0016549000029044691,Sibiu -> Arad -> Timisoara -> Lugoj -> Mehadia
+Sibiu -> Mehadia,Greedy (Lower),Yes,421,12,0.008229126000514952,Sibiu -> Rimnicu Vilcea -> Craiova -> Drobeta -> Mehadia
+Sibiu -> Mehadia,Greedy (Upper),Yes,421,16,0.00889806499981205,Sibiu -> Rimnicu Vilcea -> Craiova -> Drobeta -> Mehadia
+Sibiu -> Mehadia,A* (Lower),Yes,421,12,0.006653667998762103,Sibiu -> Rimnicu Vilcea -> Craiova -> Drobeta -> Mehadia
+Sibiu -> Mehadia,A* (Upper),Yes,421,16,0.00936631999866222,Sibiu -> Rimnicu Vilcea -> Craiova -> Drobeta -> Mehadia
+Timisoara -> Bucharest,BFS,Yes,568,8,0.0012503090001700912,Timisoara -> Arad -> Sibiu -> Fagaras -> Bucharest
+Timisoara -> Bucharest,DFS,Yes,725,7,0.0013152829997125082,Timisoara -> Arad -> Zerind -> Oradea -> Sibiu -> Fagaras -> Bucharest
+Timisoara -> Bucharest,Greedy (Lower),Yes,536,10,0.005229372000030708,Timisoara -> Arad -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest
+Timisoara -> Bucharest,Greedy (Upper),Yes,536,10,0.006041921002179151,Timisoara -> Arad -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest
+Timisoara -> Bucharest,A* (Lower),Yes,536,10,0.00575490699702641,Timisoara -> Arad -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest
+Timisoara -> Bucharest,A* (Upper),Yes,536,10,0.0067012279978371225,Timisoara -> Arad -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest
+Oradea -> Eforie,BFS,Yes,730,17,0.0031589969985361677,Oradea -> Sibiu -> Fagaras -> Bucharest -> Urziceni -> Hirsova -> Eforie
+Oradea -> Eforie,DFS,Yes,865,20,0.0045423129995469935,Oradea -> Zerind -> Arad -> Sibiu -> Fagaras -> Bucharest -> Urziceni -> Hirsova -> Eforie
+Oradea -> Eforie,Greedy (Lower),Yes,698,18,0.010040221000963356,Oradea -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest -> Urziceni -> Hirsova -> Eforie
+Oradea -> Eforie,Greedy (Upper),Yes,698,18,0.010243669999908889,Oradea -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest -> Urziceni -> Hirsova -> Eforie
+Oradea -> Eforie,A* (Lower),Yes,698,18,0.010186516999965534,Oradea -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest -> Urziceni -> Hirsova -> Eforie
+Oradea -> Eforie,A* (Upper),Yes,698,18,0.01035406399751082,Oradea -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest -> Urziceni -> Hirsova -> Eforie
+Timisoara -> Giurgiu,BFS,Yes,658,11,0.0017096359988499898,Timisoara -> Arad -> Sibiu -> Fagaras -> Bucharest -> Giurgiu
+Timisoara -> Giurgiu,DFS,Yes,815,14,0.0027382730004319455,Timisoara -> Arad -> Zerind -> Oradea -> Sibiu -> Fagaras -> Bucharest -> Giurgiu
+Timisoara -> Giurgiu,Greedy (Lower),Yes,626,15,0.00844255899937707,Timisoara -> Arad -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest -> Giurgiu
+Timisoara -> Giurgiu,Greedy (Upper),Yes,626,15,0.008557763998396695,Timisoara -> Arad -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest -> Giurgiu
+Timisoara -> Giurgiu,A* (Lower),Yes,626,15,0.008563658000639407,Timisoara -> Arad -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest -> Giurgiu
+Timisoara -> Giurgiu,A* (Upper),Yes,626,15,0.008654674002173124,Timisoara -> Arad -> Sibiu -> Rimnicu Vilcea -> Pitesti -> Bucharest -> Giurgiu
+Neamt -> Drobeta,BFS,Yes,765,13,0.001886706999357557,Neamt -> Iasi -> Vaslui -> Urziceni -> Bucharest -> Pitesti -> Craiova -> Drobeta
+Neamt -> Drobeta,DFS,Yes,1230,14,0.0026975800028594676,Neamt -> Iasi -> Vaslui -> Urziceni -> Bucharest -> Fagaras -> Sibiu -> Arad -> Timisoara -> Lugoj -> Mehadia -> Drobeta
+Neamt -> Drobeta,Greedy (Lower),Yes,765,14,0.00730942399968626,Neamt -> Iasi -> Vaslui -> Urziceni -> Bucharest -> Pitesti -> Craiova -> Drobeta
+Neamt -> Drobeta,Greedy (Upper),Yes,765,14,0.0071192069990502205,Neamt -> Iasi -> Vaslui -> Urziceni -> Bucharest -> Pitesti -> Craiova -> Drobeta
+Neamt -> Drobeta,A* (Lower),Yes,765,14,0.00676197499706177,Neamt -> Iasi -> Vaslui -> Urziceni -> Bucharest -> Pitesti -> Craiova -> Drobeta
+Neamt -> Drobeta,A* (Upper),Yes,765,14,0.0072958609998750035,Neamt -> Iasi -> Vaslui -> Urziceni -> Bucharest -> Pitesti -> Craiova -> Drobeta
