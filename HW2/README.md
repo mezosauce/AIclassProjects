@@ -7,7 +7,8 @@ swipl
 
 [bfs].
 
+[dfs].
 run_tests.
 ```
 
-Which runs `swipl`, then loads `main.pl`, `bfs.pl`, and `tests.pl`. Then it runs the test defined in tests.pl.
+Which runs `swipl`, then loads `main.pl`, `bfs.pl`, `dfs.pl` and `tests.pl`. Then it runs the test defined in tests.pl.
