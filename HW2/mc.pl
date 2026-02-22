@@ -1,3 +1,27 @@
+/**
+ * Assignment #2: Missionaries and Cannibals Problem
+ * 
+ * All members contributed to the assignment equally.
+ * 
+ * State Format: [ML, CL, Side]
+ *   ML: Missionaries on Left bank (0-3)
+ *   CL: Cannibals on Left bank (0-3)
+ *   Side: Location of boat (left or right)
+ * 
+ * Algorithms implemented:
+ *   - Depth-First Search (DFS) with cycle checking: solve_dfs/1
+ *   - Breadth-First Search (BFS) for shortest solution: solve_bfs/1
+ *
+ * How to run:
+ *   1. Start SWI-Prolog: swipl -s mc.pl
+ *   2. Run DFS solution: ?- run(dfs).
+ *   3. Run BFS solution: ?- run(bfs).
+ * 
+ * How to run tests:
+ *   1. Load tests: swipl -s tests.pl
+ *   2. Run all tests: ?- run_tests.
+ */
+
 % Define States [ML, CL, side]
 start([3, 3, left]).
 goal([0, 0, right]).
@@ -11,7 +35,7 @@ safe([ML, CL, _]) :-
     % Rule 3: Number of missionaries must be greater than or equal to number of cannibals, or 0
     (ML =:=0 ; ML >= CL),
     % Rule 4: Same as Rule 3, but calculate for opposite bank as well
-% NOTE: Technically 3-ML=:=0 is more readable, but I shortened it to ML=:=3 here
+  % NOTE: Technically 3-ML=:=0 is more readable, but I shortened it to ML=:=3 here
     ( ML =:= 3 ; 3 - ML >= 3 - CL ).
 
 % Possible boat combinations, passenger(missionaries, cannibals):
@@ -100,4 +124,32 @@ dfs(Current, Visited, Path) :-
     move(Current, Next, _),
     \+ member(Next, Visited),
     dfs(Next, [Next|Visited], Path).
+
+%% run(Algorithm) - finds and displays a solution path
+% Algorithm can be 'dfs' or 'bfs'
+
+run(dfs) :-
+    solve_dfs(Path),
+    print_solution(Path, dfs).
+run(bfs) :-
+    solve_bfs(Path),
+    print_solution(Path, bfs).
+
+% print_solution(+Path, +Algorithm) - prints path and its metadata
+print_solution(Path, Alg) :-
+    format('~nResults for ~w search:~n', [Alg]),
+    print_path(Path),
+    length(Path, L),
+    Crossings is L - 1,
+    format('~nNumber of crossings: ~w~n', [Crossings]).
+
+% print_path(+Path) - prints each state and the action leading to the next
+print_path([]).
+print_path([State]) :-
+    format('~w~n', [State]).
+print_path([S1, S2 | Rest]) :-
+    format('~w~n', [S1]),
+    move(S1, S2, Action),
+    format('  --> ~w -->~n', [Action]),
+    print_path([S2 | Rest]).
 
