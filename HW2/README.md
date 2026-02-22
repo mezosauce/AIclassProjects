@@ -5,9 +5,6 @@ swipl
 [main].
 [tests].
 
-[bfs].
-
-[dfs].
 run_tests.
 ```
 

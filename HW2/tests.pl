@@ -1,9 +1,5 @@
 consult('main.pl').
 
-constult('bfs.pl').
-
-consult('dfs.pl').
-
 %% tests.pl
 :- begin_tests(missionaries_cannibals).
 
