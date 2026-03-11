@@ -5,6 +5,7 @@
 % Min player: o
 % ==========================================
 
+:- use_module(library(lists)).
 :- dynamic(expanded/1).
 
 % ---------- instrumentation ----------
@@ -84,6 +85,7 @@ minimax_value(Board, Player, Value) :-
 % ---------- best_move/4 ----------
 % choose successor with best minimax value for Player
 best_move(Board, Player, BestBoard, BestValue) :-
+    inc_count, % Count the current board as evaluated
     findall((V, B), 
             ( move(Board, Player, B),
               other(Player, P2),
