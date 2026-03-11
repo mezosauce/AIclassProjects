@@ -35,6 +35,7 @@ win(Board, P) :-
 % full(+Board)
 full(Board) :- \+ member(e, Board).
 
+
 % ---------- TODO A1: move/3 ----------
 % move(Board, Player, NextBoard) holds if NextBoard results from placing Player in an empty cell.
 move(_Board, _Player, _NextBoard) :-
@@ -48,12 +49,15 @@ terminal(_Board) :-
 
 utility(_Board, _U) :-
     % TODO: U=1 if x wins, -1 if o wins, 0 if draw
-    fail.
+    ( win(_Board, x) -> _U = 1 % x winds
+    ; win(_Board, o) -> _U = -1 % o wins
+    ; full(_Board) -> _U = 0 % draw
+    ).
 
 % ---------- minimax ----------
 % minimax_value(+Board, +Player, -Value)
 minimax_value(Board, Player, Value) :-
-    inc_count,
+    inc_count, % Count Node already is used instrumentation
     ( terminal(Board) ->
         utility(Board, Value)
     ; Player == x ->
@@ -77,6 +81,27 @@ minimax_value(Board, Player, Value) :-
 
 % ---------- TODO A4: best_move/4 ----------
 % choose successor with best minimax value for Player
-best_move(_Board, _Player, _BestBoard, _BestValue) :-
-    % TODO
-    fail.
+best_move(Board, Player, BestBoard, BestValue) :-
+    % TODO: choose minimax-optimal successor.
+    findall((V,B), 
+            ( move(Board, Player, B),
+              other(Player, P2),
+              minimax_value(B, P2, V)
+            ),
+            Moves),
+
+    ( Player == x -> 
+        % Max player
+        max_member((BestBoard, BestValue), Moves, compare_moves)
+    ; % Min player
+        min_member((BestBoard, BestValue), Moves, compare_moves)
+    ).
+
+% 1. Empty board (full game tree)
+clear_count, minimax_value([e,e,e,e,e,e,e,e,e], x, V), get_count(N).
+
+% 2. Mid-game board
+clear_count, minimax_value([x,e,e,e,o,e,e,e,x], x, V), get_count(N).
+
+% 3. Last Move
+clear_count, minimax_value([x,o,x,o,x,o,o,x,e], o, V), get_count(N).
