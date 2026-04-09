@@ -116,3 +116,6 @@ query(no_heating).
 query(lights_stuck_off).
 query(motion_not_reported(living_room)).
 query(sensor_silent(light)).
+query(faulty_motion_sensor(living_room)).
+query(power_failure).
+query(faulty_light_sensor).
